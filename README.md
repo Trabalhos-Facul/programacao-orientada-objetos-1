@@ -1,2 +1,3 @@
-# POO1
-Trabalho final da disciplina Programação Orientada a Objetos I
+# Jogo de Cartas Desafio Ninja
+
+Um jogo de cartas usando Python e a biblioteca Pygames
