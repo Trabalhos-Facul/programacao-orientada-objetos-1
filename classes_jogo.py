@@ -1,3 +1,6 @@
+import pygame
+
+
 class Juiz:
     def __init__(self):
         self.placar_jogador = [False, False, False]
@@ -55,8 +58,17 @@ class Juiz:
             return False
 
 
-class Carta:
-    def __init__(self, id_carta, valor, elemento):
+# heranca sendo utilizada
+class Carta(pygame.sprite.Sprite):
+    def __init__(self, id_carta, valor, elemento, posicao):
+        pygame.sprite.Sprite.__init__(self)
+        self.clicked = False
         self.id = id_carta
         self.valor = valor
         self.elemento = elemento
+        self.image = pygame.image.load(f'/img/Card-Jitsu_Cards_full_{id}.png').convert()
+        self.image = pygame.transform.scale(self.image, (100, 120))
+        self.rect = self.image.get_rect()
+        self.rect.center = posicao
+
+
