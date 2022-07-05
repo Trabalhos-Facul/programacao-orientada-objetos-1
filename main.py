@@ -19,13 +19,17 @@ tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("Jogo Legal")
 clock = pygame.time.Clock()
 
-# por todas as sptrites aqui
-mao_jogador = pygame.sprite.Group()
+# cria jogador e bot
 
-# cria as cartas
+# cria o juiz
+
+# cria as cartas todas as cartas(decks)
 c = classes_jogo.Carta(1, 3, 'fogo', POSICAO)
 
-# adiciona cartas a mao
+# por todas as sprites aqui
+mao_jogador = pygame.sprite.Group()
+
+# adiciona cartas a mao do jogador
 mao_jogador.add(c)
 
 rodando = True
