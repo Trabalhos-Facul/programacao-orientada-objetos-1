@@ -37,7 +37,6 @@ class Juiz:
         else:
             return 0
 
-
     def contabiliza_no_placar_do_ganhador_da_rodada(self, ganhador, elemento):
         index_para_ser_contabilizado = self.elementos_cartas.index(elemento)
         jogador_ganhou = ganhador == 0
@@ -50,7 +49,10 @@ class Juiz:
             self.placar_bot[index_para_ser_contabilizado] = True
 
     def verifica_se_o_jogo_terminou(self):
-        pass
+        if all(self.placar_jogador) or all(self.placar_bot):
+            return True
+        else:
+            return False
 
 
 class Carta:
