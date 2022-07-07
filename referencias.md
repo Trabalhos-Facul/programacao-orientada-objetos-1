@@ -26,6 +26,10 @@ git push
 
 [[Git] Removendo Arquivos de um Repositório](https://medium.com/@andgomes/git-removendo-arquivos-de-um-reposit%C3%B3rio-7eed699a035f)
 
+---
+
 ## [Excluir commit de um branch](https://pt.stackoverflow.com/questions/128578/como-excluir-commit-de-um-branch-no-git)
+
+---
 
 ## [Padrões do Git ignore](https://www.atlassian.com/br/git/tutorials/saving-changes/gitignore)
