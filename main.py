@@ -22,13 +22,16 @@ clock = pygame.time.Clock()
 # cria o juiz
 
 # cria as cartas todas as cartas(decks)
-c = classes_jogo.Carta(1, 3, 'fogo', POSICAO)
+
 
 # por todas as sprites aqui
 mao_jogador = pygame.sprite.Group()
 
-# adiciona cartas a mao do jogador
-mao_jogador.add(c)
+# adiciona as 4 cartas a mao do jogador
+
+for i in range(4):
+    c = classes_jogo.Carta(i+1, 3, 'fogo', i)
+    mao_jogador.add(c)
 
 rodando = True
 while rodando:
