@@ -11,8 +11,6 @@ LARGURA = 800
 ALTURA = 500
 QUADROS_POR_SEGUNDO = 30
 
-POSICAO = (LARGURA//2, ALTURA//2)
-
 # inicializacao da janela pygame
 pygame.init()
 tela = pygame.display.set_mode((LARGURA, ALTURA))
