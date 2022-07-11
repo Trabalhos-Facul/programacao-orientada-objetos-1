@@ -1,4 +1,5 @@
 import pygame
+import random
 
 
 class Juiz:
@@ -74,4 +75,17 @@ class Carta(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (largura_offset_inicial + (posicao_carta * 125), (altura_tela * 3) // 4)
 
+
+class Deck:
+    def __init__(self):
+        self.cartas = []
+        for i in range(1,5):
+            self.cartas.append(i)
+
+    def comprar_carta(self):
+        if self.cartas:
+            x = random.randint(0,len(self.cartas)-1)
+            return self.cartas.pop(x)
+        else:
+            return -1
 
