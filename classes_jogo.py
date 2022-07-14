@@ -89,3 +89,21 @@ class Deck:
         else:
             return -1
 
+
+
+class Placar(pygame.sprite.Sprite):
+    def __init__(self,ganhou_agua,ganhou_fogo,ganhou_gelo):
+        pygame.sprite.Sprite.__init__(self)
+        self.ganhou_agua = ganhou_agua
+        self.ganhou_fogo = ganhou_fogo
+        self.ganhou_gelo = ganhou_gelo
+        if ganhou_agua != False:
+            self.image = pygame.image.load(f'img/Card-Jitsu_Cards_full_1.png').convert()
+            self.image = pygame.transform.scale(self.image, (100, 100))
+            self.rect = self.image.get_rect()
+            self.rect.center = (50,250)
+        else:
+            self.image = pygame.image.load(f'img/Card-Jitsu_Cards_full_2.png').convert()
+            self.image = pygame.transform.scale(self.image, (100, 100))
+            self.rect = self.image.get_rect()
+            self.rect.center = (50, 250)

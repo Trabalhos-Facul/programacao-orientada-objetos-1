@@ -23,7 +23,8 @@ clock = pygame.time.Clock()
 
 # cria as cartas todas as cartas(decks)
 
-
+# cria o placar
+placar_player = classes_jogo.Placar(True,False,False)
 # por todas as sprites aqui
 mao_jogador = pygame.sprite.Group()
 
@@ -32,7 +33,8 @@ mao_jogador = pygame.sprite.Group()
 for i in range(4):
     c = classes_jogo.Carta(i+1, 3, 'fogo', i)
     mao_jogador.add(c)
-
+placar_agua = classes_jogo.Placar(True,False,False)
+mao_jogador.add(placar_agua)
 rodando = True
 while rodando:
 
