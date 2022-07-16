@@ -10,7 +10,7 @@ AZUL = (0, 0, 255)
 
 LARGURA = 800
 ALTURA = 500
-QUADROS_POR_SEGUNDO = 30
+QUADROS_POR_SEGUNDO = 60
 
 # inicializacao da janela pygame
 pygame.init()
