@@ -1,5 +1,6 @@
 import pygame
 import classes_jogo
+import elementos_tela
 
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
@@ -30,7 +31,7 @@ mao_jogador = pygame.sprite.Group()
 # adiciona as 4 cartas a mao do jogador
 
 for i in range(4):
-    c = classes_jogo.Carta(i+1, 3, 'fogo', i)
+    c = elementos_tela.Carta(i+1, 3, 'fogo', i)
     mao_jogador.add(c)
 
 rodando = True
