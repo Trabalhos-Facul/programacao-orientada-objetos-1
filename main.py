@@ -43,6 +43,19 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
 
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        pos = pygame.mouse.get_pos()
+
+        if event.button == 1:
+            for c in mao_jogador:
+                if c.rect.collidepoint(pos):
+                    c.clicked = True
+
+    for c in mao_jogador:
+        if c.clicked:
+            print(f'carta {c.id}, valor {c.valor} elemento {c.elemento} foi clicada')
+            mao_jogador.remove(c)
+
     # atualiza o estado do jogo
     mao_jogador.update()
 
