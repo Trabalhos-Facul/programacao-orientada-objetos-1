@@ -38,6 +38,8 @@ for i in range(4):
     mao_jogador.add(c)
 
 rodando = True
+esperando_carta = True
+
 while rodando:
 
     clock.tick(QUADROS_POR_SEGUNDO)
@@ -51,13 +53,39 @@ while rodando:
 
         if event.button == 1:
             for c in mao_jogador:
-                if c.rect.collidepoint(pos):
+                if c.rect.collidepoint(pos) and esperando_carta:
                     c.clicked = True
+                    esperando_carta = False
 
-    for c in mao_jogador:
-        if c.clicked:
-            print(f'carta {c.id}, valor {c.valor} elemento {c.elemento} foi clicada')
-            mao_jogador.remove(c)
+    if event.type == pygame.MOUSEBUTTONUP:
+        for c in mao_jogador:
+            if c.clicked:
+                id_carta_computador = deck_computador.comprar_carta()
+
+                carta_computador = dados_cartas.obter_valor_da_carta_e_elemento(id_carta_computador)
+                carta_jogador = dados_cartas.obter_valor_da_carta_e_elemento(c.id)
+
+                ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
+
+                print(f'Jogador: {carta_jogador}')
+                print(f'Computador: {carta_computador}')
+                print(f'Ganhador: {ganhador}')
+
+                posicao_carta_jogada = c.posicao
+
+                id_nova_carta = deck_jogador.comprar_carta()
+
+                if id_nova_carta != -1:
+                    valor_nova_carta, elemento_nova_carta = dados_cartas.obter_valor_da_carta_e_elemento(id_nova_carta)
+                    nova_carta = elementos_tela.Carta(id_nova_carta, valor_nova_carta, elemento_nova_carta, posicao_carta_jogada)
+
+                mao_jogador.remove(c)
+                del c
+                if id_nova_carta != -1:
+                    mao_jogador.add(nova_carta)
+
+                esperando_carta = True
+
 
     # atualiza o estado do jogo
     mao_jogador.update()
