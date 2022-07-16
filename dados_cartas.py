@@ -2,12 +2,12 @@ import json
 
 
 def obter_valor_da_carta_e_elemento(id_carta):
-    f = open('cartas.json', 'r')
+    f = open('cards.json', 'r')
 
     data = json.load(f)
 
-    valor_carta = data[id_carta - 1]['valor']
-    elemento_carta = data[id_carta - 1]['elemento']
+    valor_carta = data[id_carta - 1]['value']
+    elemento_carta = data[id_carta - 1]['element']
 
     f.close()
 
@@ -15,7 +15,7 @@ def obter_valor_da_carta_e_elemento(id_carta):
 
 
 def obter_numero_de_cartas():
-    f = open('cartas.json', 'r')
+    f = open('cards.json', 'r')
 
     data = json.load(f)
 
