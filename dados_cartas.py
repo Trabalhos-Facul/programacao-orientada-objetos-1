@@ -6,8 +6,8 @@ def obter_valor_da_carta_e_elemento(id_carta):
 
     data = json.load(f)
 
-    valor_carta = print(data[id_carta-1]['valor'])
-    elemento_carta = print(data[id_carta-1]['elemento'])
+    valor_carta = data[id_carta - 1]['valor']
+    elemento_carta = data[id_carta - 1]['elemento']
 
     f.close()
 
