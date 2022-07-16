@@ -1,6 +1,7 @@
 import pygame
 import classes_jogo
 import elementos_tela
+import dados_cartas
 
 BRANCO = (255, 255, 255)
 PRETO = (0, 0, 0)
@@ -22,8 +23,10 @@ clock = pygame.time.Clock()
 juiz = classes_jogo.Juiz()
 
 # cria as cartas todas as cartas(decks)
-deck_jogador = classes_jogo.Deck()
-deck_computador = classes_jogo.Deck()
+quantidade_cartas = dados_cartas.obter_numero_de_cartas()
+
+deck_jogador = classes_jogo.Deck(quantidade_cartas)
+deck_computador = classes_jogo.Deck(quantidade_cartas)
 
 # por todas as sprites aqui
 mao_jogador = pygame.sprite.Group()
