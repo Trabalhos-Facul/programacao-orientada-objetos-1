@@ -18,6 +18,50 @@
     "id": 4,
     "valor": 3,
     "elemento": "fogo"
+  },
+  {
+    "id": 5,
+    "valor": 4,
+    "elemento": "fogo"
+  },
+  {
+    "id": 6,
+    "valor": 6,
+    "elemento": "fogo"
+  },
+  {
+    "id": 7,
+    "valor": 2,
+    "elemento": "fogo"
+  },
+  {
+    "id": 8,
+    "valor": 7,
+    "elemento": "fogo"
+  },
+  {
+    "id": 9,
+    "valor": 2,
+    "elemento": "fogo"
+  },
+  {
+    "id": 10,
+    "valor": 5,
+    "elemento": "fogo"
+  },
+  {
+    "id": 11,
+    "valor": 3,
+    "elemento": "gelo"
+  },
+  {
+    "id": 12,
+    "valor": 2,
+    "elemento": "gelo"
+  },
+  {
+    "id": 13,
+    "valor": 5,
+    "elemento": "gelo"
   }
-
 ]
