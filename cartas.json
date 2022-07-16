@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "valor":3,
+    "elemento": "fogo"
+  },
+  {
+    "id": 2,
+    "valor": 2,
+    "elemento": "fogo"
+  },
+  {
+    "id": 3,
+    "valor": 8,
+    "elemento": "fogo"
+  },
+  {
+    "id": 4,
+    "valor": 3,
+    "elemento": "fogo"
+  }
+
+]
