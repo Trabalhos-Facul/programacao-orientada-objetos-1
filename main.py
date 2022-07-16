@@ -19,7 +19,7 @@ pygame.display.set_caption("Jogo Legal")
 clock = pygame.time.Clock()
 
 # cria o juiz
-
+juiz = classes_jogo.Juiz()
 
 # cria as cartas todas as cartas(decks)
 deck_jogador = classes_jogo.Deck()
