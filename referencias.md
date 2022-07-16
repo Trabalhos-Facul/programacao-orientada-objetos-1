@@ -33,3 +33,13 @@ git push
 ---
 
 ## [Padrões do Git ignore](https://www.atlassian.com/br/git/tutorials/saving-changes/gitignore)
+
+16/07
+
+https://www.geeksforgeeks.org/read-json-file-using-python/
+
+https://www.devmedia.com.br/json-tutorial/25275
+
+https://www.devmedia.com.br/colecoes-no-python-listas-tuplas-e-dicionarios/40678#dicionarios
+
+https://www.youtube.com/watch?v=fcryHcZE_sM&list=PLsk-HSGFjnaH5yghzu7PcOzm9NhsW0Urw&index=3
