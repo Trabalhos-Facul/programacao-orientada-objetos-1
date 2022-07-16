@@ -10,6 +10,7 @@ class Carta(pygame.sprite.Sprite):
         self.id = id_carta
         self.valor = valor
         self.elemento = elemento
+        self.posicao = posicao_carta
         self.image = pygame.image.load(f'img/Card-Jitsu_Cards_full_{id_carta}.png').convert()
         self.image = pygame.transform.scale(self.image, (100, 120))
         self.rect = self.image.get_rect()
