@@ -59,9 +59,9 @@ class Juiz:
 
 
 class Deck:
-    def __init__(self):
+    def __init__(self, tamnho_deck):
         self.cartas = []
-        for i in range(1,5):
+        for i in range(1, tamnho_deck+1):
             self.cartas.append(i)
 
     def comprar_carta(self):
