@@ -1,4 +1,3 @@
-import pygame
 import random
 
 
@@ -12,16 +11,16 @@ class Juiz:
         jogador_ganhou = 0
         bot_ganhou = 1
 
-        resultado = self.qual_elemento_ganha_retorna_none_caso_empate(carta_jogador.elemento, carta_bot.elemento)
+        resultado = self.qual_elemento_ganha_retorna_none_caso_empate(carta_jogador[1], carta_bot[1])
 
         mesmo_elemento = resultado is None
         elemento_do_jogador_ganha = resultado == 0
 
         if mesmo_elemento:
-            if carta_jogador.valor == carta_bot:
+            if carta_jogador[0] == carta_bot[0]:
                 return None
 
-            if carta_jogador.valor > carta_bot.valor:
+            if carta_jogador[0] > carta_bot[0]:
                 return jogador_ganhou
 
         if elemento_do_jogador_ganha:
