@@ -13,6 +13,7 @@ LARGURA = 800
 ALTURA = 500
 QUADROS_POR_SEGUNDO = 60
 
+
 # inicializacao da janela pygame
 pygame.init()
 tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -39,6 +40,8 @@ for i in range(4):
 
 rodando = True
 esperando_carta = True
+imagemtela = pygame.image.load(f'img/dojo.png')
+imagemtela = pygame.transform.scale(imagemtela, (800, 500))
 
 while rodando:
 
@@ -91,7 +94,7 @@ while rodando:
     mao_jogador.update()
 
     # desenha
-    tela.fill(PRETO)
+    tela.blit(imagemtela,(0,0))
     mao_jogador.draw(tela)
 
     pygame.display.flip()
