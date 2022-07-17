@@ -57,6 +57,13 @@ class Juiz:
         else:
             return False
 
+    def quem_ganhou_a_jogo(self):
+        if all(self.placar_jogador):
+            return 0
+        elif all(self.placar_bot):
+            return 1
+        else:
+            return None
 
 class Deck:
     def __init__(self, tamnho_deck):
