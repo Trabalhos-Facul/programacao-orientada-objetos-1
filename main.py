@@ -70,6 +70,13 @@ while rodando:
 
                     ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
 
+                    if ganhador:
+                        elemento_ganhador = carta_computador[1]
+                    else:
+                        elemento_ganhador = carta_jogador[1]
+
+                    juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
+
                     print(f'Jogador: {carta_jogador}')
                     print(f'Computador: {carta_computador}')
                     print(f'Ganhador: {ganhador}')
@@ -87,6 +94,9 @@ while rodando:
                     if id_nova_carta != -1:
                         mao_jogador.add(nova_carta)
 
+                    if juiz.verifica_se_o_jogo_terminou():
+                        rodando = False
+
                     esperando_carta = True
 
 
@@ -98,5 +108,11 @@ while rodando:
     mao_jogador.draw(tela)
 
     pygame.display.flip()
+
+
+if juiz.quem_ganhou_a_jogo():
+    print('computador ganhou')
+else:
+    print('jogador ganhou')
 
 pygame.quit()
