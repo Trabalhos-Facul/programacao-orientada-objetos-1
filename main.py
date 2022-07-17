@@ -95,24 +95,24 @@ while rodando:
                         mao_jogador.add(nova_carta)
 
                     if juiz.verifica_se_o_jogo_terminou():
-                        rodando = False
+                        if juiz.quem_ganhou_a_jogo():
+                            print('computador ganhou')
+                        else:
+                            print('jogador ganhou')
+                        break
 
                     esperando_carta = True
 
 
     # atualiza o estado do jogo
     mao_jogador.update()
+    placar_jogador.update()
 
     # desenha
     tela.blit(imagemtela,(0,0))
     mao_jogador.draw(tela)
+    placar_jogador.draw(tela)
 
     pygame.display.flip()
-
-
-if juiz.quem_ganhou_a_jogo():
-    print('computador ganhou')
-else:
-    print('jogador ganhou')
 
 pygame.quit()
