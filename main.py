@@ -33,11 +33,15 @@ deck_computador = classes_jogo.Deck(quantidade_cartas)
 mao_jogador = pygame.sprite.Group()
 
 placar_jogador = pygame.sprite.Group()
-plocar_computador = pygame.sprite.Group()
+placar_computador = pygame.sprite.Group()
 
-f = elementos_tela.Fogo()
-a = elementos_tela.Agua()
-g = elementos_tela.Gelo()
+f = elementos_tela.Fogo(True)
+a = elementos_tela.Agua(True)
+g = elementos_tela.Gelo(True)
+
+a_computador = elementos_tela.Agua(False)
+g_computador = elementos_tela.Gelo(False)
+f_computador = elementos_tela.Fogo(False)
 
 # adiciona as 4 cartas a mao do jogador
 for i in range(4):
@@ -47,6 +51,7 @@ for i in range(4):
 
 rodando = True
 esperando_carta = True
+
 imagemtela = pygame.image.load(f'img/dojo.png')
 imagemtela = pygame.transform.scale(imagemtela, (800, 500))
 
@@ -79,6 +84,12 @@ while rodando:
 
                     if ganhador:
                         elemento_ganhador = carta_computador[1]
+                        if elemento_ganhador == 'fogo':
+                            placar_computador.add(f_computador)
+                        elif elemento_ganhador == 'agua':
+                            placar_computador.add(a_computador)
+                        elif elemento_ganhador == 'gelo':
+                            placar_computador.add(g_computador)
                     else:
                         elemento_ganhador = carta_jogador[1]
                         if elemento_ganhador == 'fogo':
@@ -120,11 +131,13 @@ while rodando:
     # atualiza o estado do jogo
     mao_jogador.update()
     placar_jogador.update()
+    placar_computador.update()
 
     # desenha
     tela.blit(imagemtela,(0,0))
     mao_jogador.draw(tela)
     placar_jogador.draw(tela)
+    placar_computador.draw(tela)
 
     pygame.display.flip()
 
