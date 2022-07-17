@@ -27,9 +27,10 @@ class Fogo(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         if jogador:
-            self.rect.center = 200,100
+            self.rect.center = 200, 100
         else:
-            self.rect.center = 600,100
+            self.rect.center = 600, 100
+
 
 class Agua(pygame.sprite.Sprite):
     def __init__(self, jogador):
@@ -57,3 +58,18 @@ class Gelo(pygame.sprite.Sprite):
             self.rect.center = 300,100
         else:
             self.rect.center = 500,100
+
+
+class Mensagem_final(pygame.sprite.Sprite):
+    def __init__(self, jogador: object) -> object:
+
+        pygame.sprite.Sprite.__init__(self)
+
+        if jogador:
+            self.image = pygame.image.load(f'img/voce_ganhou.png').convert()
+        else:
+            self.image = pygame.image.load(f'img/voce_perdeu.png').convert()
+
+        self.rect = self.image.get_rect()
+
+        self.rect.center = 400, 250
