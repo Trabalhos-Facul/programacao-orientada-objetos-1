@@ -32,6 +32,13 @@ deck_computador = classes_jogo.Deck(quantidade_cartas)
 # por todas as sprites aqui
 mao_jogador = pygame.sprite.Group()
 
+placar_jogador = pygame.sprite.Group()
+plocar_computador = pygame.sprite.Group()
+
+f = elementos_tela.Fogo()
+a = elementos_tela.Agua()
+g = elementos_tela.Gelo()
+
 # adiciona as 4 cartas a mao do jogador
 for i in range(4):
     id_carta = deck_jogador.comprar_carta()
@@ -74,6 +81,12 @@ while rodando:
                         elemento_ganhador = carta_computador[1]
                     else:
                         elemento_ganhador = carta_jogador[1]
+                        if elemento_ganhador == 'fogo':
+                            placar_jogador.add(f)
+                        elif elemento_ganhador == 'agua':
+                            placar_jogador.add(a)
+                        else:
+                            placar_jogador.add(g)
 
                     juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
 
