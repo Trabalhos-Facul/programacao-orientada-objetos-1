@@ -35,6 +35,8 @@ mao_jogador = pygame.sprite.Group()
 placar_jogador = pygame.sprite.Group()
 placar_computador = pygame.sprite.Group()
 
+resultado_final = pygame.sprite.Group()
+
 f = elementos_tela.Fogo(True)
 a = elementos_tela.Agua(True)
 g = elementos_tela.Gelo(True)
@@ -119,10 +121,15 @@ while rodando:
                         mao_jogador.add(nova_carta)
 
                     if juiz.verifica_se_o_jogo_terminou():
+
                         if juiz.quem_ganhou_a_jogo():
                             print('computador ganhou')
+                            mensagem = elementos_tela.Mensagem_final(False)
                         else:
                             print('jogador ganhou')
+                            mensagem = elementos_tela.Mensagem_final(True)
+
+                        resultado_final.add(mensagem)
                         break
 
                     esperando_carta = True
@@ -132,12 +139,14 @@ while rodando:
     mao_jogador.update()
     placar_jogador.update()
     placar_computador.update()
+    resultado_final.update()
 
     # desenha
     tela.blit(imagemtela,(0,0))
     mao_jogador.draw(tela)
     placar_jogador.draw(tela)
     placar_computador.draw(tela)
+    resultado_final.draw(tela)
 
     pygame.display.flip()
 
