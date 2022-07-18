@@ -60,7 +60,7 @@ class Gelo(pygame.sprite.Sprite):
             self.rect.center = 500,100
 
 
-class Mensagem_final(pygame.sprite.Sprite):
+class MensagemFinal(pygame.sprite.Sprite):
     def __init__(self, jogador: object) -> object:
 
         pygame.sprite.Sprite.__init__(self)
