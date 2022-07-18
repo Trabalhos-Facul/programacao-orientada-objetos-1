@@ -74,65 +74,64 @@ while rodando:
                         c.clicked = True
                         esperando_carta = False
 
-        if event.type == pygame.MOUSEBUTTONUP:
-            for c in mao_jogador:
-                if c.clicked:
-                    id_carta_computador = deck_computador.comprar_carta()
+    for c in mao_jogador:
+        if c.clicked:
+            id_carta_computador = deck_computador.comprar_carta()
 
-                    carta_computador = dados_cartas.obter_valor_da_carta_e_elemento(id_carta_computador)
-                    carta_jogador = dados_cartas.obter_valor_da_carta_e_elemento(c.id)
+            carta_computador = dados_cartas.obter_valor_da_carta_e_elemento(id_carta_computador)
+            carta_jogador = dados_cartas.obter_valor_da_carta_e_elemento(c.id)
 
-                    ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
+            ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
 
-                    if ganhador:
-                        elemento_ganhador = carta_computador[1]
-                        if elemento_ganhador == 'fogo':
-                            placar_computador.add(f_computador)
-                        elif elemento_ganhador == 'agua':
-                            placar_computador.add(a_computador)
-                        elif elemento_ganhador == 'gelo':
-                            placar_computador.add(g_computador)
-                    else:
-                        elemento_ganhador = carta_jogador[1]
-                        if elemento_ganhador == 'fogo':
-                            placar_jogador.add(f)
-                        elif elemento_ganhador == 'agua':
-                            placar_jogador.add(a)
-                        else:
-                            placar_jogador.add(g)
+            if ganhador:
+                elemento_ganhador = carta_computador[1]
+                if elemento_ganhador == 'fogo':
+                    placar_computador.add(f_computador)
+                elif elemento_ganhador == 'agua':
+                    placar_computador.add(a_computador)
+                elif elemento_ganhador == 'gelo':
+                    placar_computador.add(g_computador)
+            else:
+                elemento_ganhador = carta_jogador[1]
+                if elemento_ganhador == 'fogo':
+                    placar_jogador.add(f)
+                elif elemento_ganhador == 'agua':
+                    placar_jogador.add(a)
+                else:
+                    placar_jogador.add(g)
 
-                    juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
+            juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
 
-                    print(f'Jogador: {carta_jogador}')
-                    print(f'Computador: {carta_computador}')
-                    print(f'Ganhador: {ganhador}')
+            print(f'Jogador: {carta_jogador}')
+            print(f'Computador: {carta_computador}')
+            print(f'Ganhador: {ganhador}')
 
-                    posicao_carta_jogada = c.posicao
+            posicao_carta_jogada = c.posicao
 
-                    id_nova_carta = deck_jogador.comprar_carta()
+            id_nova_carta = deck_jogador.comprar_carta()
 
-                    if id_nova_carta != -1:
-                        valor_nova_carta, elemento_nova_carta = dados_cartas.obter_valor_da_carta_e_elemento(id_nova_carta)
-                        nova_carta = elementos_tela.Carta(id_nova_carta, valor_nova_carta, elemento_nova_carta, posicao_carta_jogada)
+            if id_nova_carta != -1:
+                valor_nova_carta, elemento_nova_carta = dados_cartas.obter_valor_da_carta_e_elemento(id_nova_carta)
+                nova_carta = elementos_tela.Carta(id_nova_carta, valor_nova_carta, elemento_nova_carta, posicao_carta_jogada)
 
-                    mao_jogador.remove(c)
-                    del c
-                    if id_nova_carta != -1:
-                        mao_jogador.add(nova_carta)
+            mao_jogador.remove(c)
+            del c
+            if id_nova_carta != -1:
+                mao_jogador.add(nova_carta)
 
-                    if juiz.verifica_se_o_jogo_terminou():
+            if juiz.verifica_se_o_jogo_terminou():
 
-                        if juiz.quem_ganhou_a_jogo():
-                            print('computador ganhou')
-                            mensagem = elementos_tela.Mensagem_final(False)
-                        else:
-                            print('jogador ganhou')
-                            mensagem = elementos_tela.Mensagem_final(True)
+                if juiz.quem_ganhou_a_jogo():
+                    print('computador ganhou')
+                    mensagem = elementos_tela.Mensagem_final(False)
+                else:
+                    print('jogador ganhou')
+                    mensagem = elementos_tela.Mensagem_final(True)
 
-                        resultado_final.add(mensagem)
-                        break
+                resultado_final.add(mensagem)
+                break
 
-                    esperando_carta = True
+            esperando_carta = True
 
 
     # atualiza o estado do jogo
