@@ -2,13 +2,29 @@
 
 ## Uma versão do jogo de cartas do ClubPenguin usando Python e a biblioteca Pygames.
 
+## Objetivo do Jogo
+
+O objetivo é ganhar uma rodadas com cada um dos elementos (fogo, água e gelo) o 
+primeiro jogador conseguir isso é o vencedor.
+
 ## Como Jogar
-O jogador começa com 4 cartas na mão e outras 66 cartas para comprar (70 carta totais), a cada rodada, você deve escolher uma carta para jogar clicando em cima da carta escolhida, no final da rodada, o jogador recebe uma nova carta (a não ser que o baralho de compra não tenha mais cartas) e o ganhador será definido. Cada carta possi duas informações: elemento e valor.
 
-## Regras do jogo
-O objetivo é ganhar uma ou mais rodadas com cada um dos elementos(fogo, água e gelo), o ganhador da rodada é definido pela seguinte regra: fogo ganha de gelo, gelo ganha de água e água ganha de fogo, caso os elementos jogados pelos dois jogadores seja igual, aquele com a carta de maior valor irá ganhar, caso os valores sejam iguais, será considerado empate.
-OBS: O número de vezes que o jogador ganhou com cada elemento é insignificante, desde que ele tenha ganho uma vez com o elemento já será contado, ou seja, supondo que um jogador ganhou 5 vezes com o elemento fogo e 2 vezes com o elemento água, equanto o outro ganhou apenas uma vez com esses mesmos 2 elementos, os dois estão empatados.
+Inicie o jogo executando o arquivo main.py, será mostrado a seguinte Tela:
 
+![Tela Inicial](/pritns_jogo/tela_inicial.png)
 
+### A Rodada
 
+No inicio de cada rodada o jogador deve escolher qual carta ele vai jogar clicando no ícone da respectiva carta, após isso, 
+o resultado será exibido na tela, se o jogador ganhou, o elemento será adicionado ao seu placar.
 
+A carta escolhida pelo jogador estará à esquerda e a carta selecionada pelo computador se encontrará à direita:
+
+![Tela Jogou Carta](/pritns_jogo/jogou_carta.png)
+
+### O Fim do Jogo
+
+O jogo termina quando o jogador ou o computador ganharem 3 rodadas usando cartas de elementos distintos. Quando o jogo encerra, 
+uma mensagem será exibida na tela dizendo o resultado da partida.
+
+![Tela Final Ganhou](/pritns_jogo/tela_ganhou.png)
