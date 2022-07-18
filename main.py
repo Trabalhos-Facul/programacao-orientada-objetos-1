@@ -48,8 +48,8 @@ for i in range(4):
 rodando = True
 esperando_carta = True
 
-imagemtela = pygame.image.load(f'img/dojo.png')
-imagemtela = pygame.transform.scale(imagemtela, (800, 500))
+imagem_fundo = pygame.image.load(f'img/dojo.png')
+imagem_fundo = pygame.transform.scale(imagem_fundo, (800, 500))
 
 while rodando:
 
@@ -136,7 +136,7 @@ while rodando:
     resultado_final.update()
 
     # desenha
-    tela.blit(imagemtela,(0,0))
+    tela.blit(imagem_fundo, (0, 0))
     mao_jogador.draw(tela)
     placar_jogador.draw(tela)
     placar_computador.draw(tela)
