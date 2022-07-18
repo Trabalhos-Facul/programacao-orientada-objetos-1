@@ -83,24 +83,25 @@ while rodando:
 
             ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
 
-            if ganhador:
-                elemento_ganhador = carta_computador[1]
-                if elemento_ganhador == 'fogo':
-                    placar_computador.add(f_computador)
-                elif elemento_ganhador == 'agua':
-                    placar_computador.add(a_computador)
-                elif elemento_ganhador == 'gelo':
-                    placar_computador.add(g_computador)
-            else:
-                elemento_ganhador = carta_jogador[1]
-                if elemento_ganhador == 'fogo':
-                    placar_jogador.add(f)
-                elif elemento_ganhador == 'agua':
-                    placar_jogador.add(a)
+            if not ganhador is None:
+                if ganhador:
+                    elemento_ganhador = carta_computador[1]
+                    if elemento_ganhador == 'fogo':
+                        placar_computador.add(f_computador)
+                    elif elemento_ganhador == 'agua':
+                        placar_computador.add(a_computador)
+                    elif elemento_ganhador == 'gelo':
+                        placar_computador.add(g_computador)
                 else:
-                    placar_jogador.add(g)
+                    elemento_ganhador = carta_jogador[1]
+                    if elemento_ganhador == 'fogo':
+                        placar_jogador.add(f)
+                    elif elemento_ganhador == 'agua':
+                        placar_jogador.add(a)
+                    else:
+                        placar_jogador.add(g)
 
-            juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
+                juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
 
             print(f'Jogador: {carta_jogador}')
             print(f'Computador: {carta_computador}')
