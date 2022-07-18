@@ -89,3 +89,14 @@ class FundoPlacar(pygame.sprite.Sprite):
             self.image = pygame.image.load(f'img/placar_computador.png').convert()
             self.rect = self.image.get_rect()
             self.rect.center = 600, 100
+
+
+class CartaJogada(pygame.sprite.Sprite):
+    def __init__(self, jogador, img):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = img
+        self.rect = self.image.get_rect()
+        if jogador:
+            self.rect.center = 200, 250
+        else:
+            self.rect.center = 600, 250

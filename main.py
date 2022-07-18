@@ -30,6 +30,7 @@ placar_jogador = pygame.sprite.Group()
 placar_computador = pygame.sprite.Group()
 
 resultado_final = pygame.sprite.Group()
+cartas_rodada = pygame.sprite.Group()
 
 f = elementos_tela.Fogo(True)
 a = elementos_tela.Agua(True)
@@ -80,6 +81,12 @@ while rodando:
             carta_jogador = dados_cartas.obter_valor_da_carta_e_elemento(c.id)
 
             ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
+
+            carta_jogador_mostrar = elementos_tela.CartaJogada(True, c.image)
+            carta_computador_mostrar = elementos_tela.CartaJogada(False, dados_cartas.imagem_carta(id_carta_computador))
+
+            cartas_rodada.add(carta_jogador_mostrar)
+            cartas_rodada.add(carta_computador_mostrar)
 
             if not ganhador is None:
                 if ganhador:
@@ -137,14 +144,18 @@ while rodando:
     mao_jogador.update()
     placar_jogador.update()
     placar_computador.update()
+    cartas_rodada.update()
     resultado_final.update()
+
 
     # desenha
     tela.blit(imagem_fundo, (0, 0))
-    mao_jogador.draw(tela)
     placar_jogador.draw(tela)
     placar_computador.draw(tela)
+    mao_jogador.draw(tela)
+    cartas_rodada.draw(tela)
     resultado_final.draw(tela)
+
 
     pygame.display.flip()
 
