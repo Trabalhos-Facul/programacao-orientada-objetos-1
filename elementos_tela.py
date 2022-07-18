@@ -73,3 +73,18 @@ class Mensagem_final(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.rect.center = 400, 250
+
+
+class FundoPlacar(pygame.sprite.Sprite):
+    def __init__(self, jogador):
+
+        pygame.sprite.Sprite.__init__(self)
+
+        if jogador:
+            self.image = pygame.image.load(f'img/placar_jogador.png').convert()
+            self.rect = self.image.get_rect()
+            self.rect.center = 200, 100
+        else:
+            self.image = pygame.image.load(f'img/placar_computador.png').convert()
+            self.rect = self.image.get_rect()
+            self.rect.center = 600, 100
