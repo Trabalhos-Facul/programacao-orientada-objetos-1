@@ -45,6 +45,10 @@ for i in range(4):
     c = elementos_tela.Carta(id_carta, 3, 'fogo', i)
     mao_jogador.add(c)
 
+# adiciona os fundos dos placares
+placar_jogador.add(elementos_tela.FundoPlacar(True))
+placar_computador.add(elementos_tela.FundoPlacar(False))
+
 rodando = True
 esperando_carta = True
 
@@ -118,10 +122,10 @@ while rodando:
 
                 if juiz.quem_ganhou_a_jogo():
                     print('computador ganhou')
-                    mensagem = elementos_tela.Mensagem_final(False)
+                    mensagem = elementos_tela.MensagemFinal(False)
                 else:
                     print('jogador ganhou')
-                    mensagem = elementos_tela.Mensagem_final(True)
+                    mensagem = elementos_tela.MensagemFinal(True)
 
                 resultado_final.add(mensagem)
                 break
