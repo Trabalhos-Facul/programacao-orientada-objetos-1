@@ -11,7 +11,7 @@ QUADROS_POR_SEGUNDO = 60
 # inicializacao da janela pygame
 pygame.init()
 tela = pygame.display.set_mode((LARGURA, ALTURA))
-pygame.display.set_caption("Jogo Legal")
+pygame.display.set_caption("Desafio Ninja")
 clock = pygame.time.Clock()
 
 # cria o juiz
