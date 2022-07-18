@@ -1,5 +1,6 @@
 import pygame
-# heranca sendo utilizada
+
+
 class Carta(pygame.sprite.Sprite):
     def __init__(self, id_carta, valor, elemento, posicao_carta):
         altura_tela = 500
