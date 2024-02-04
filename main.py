@@ -5,7 +5,7 @@ import dados_cartas
 import game
 
 # inicializacao da janela pygame
-game = game.Game()
+game = game.GameDrawer()
 
 # cria o juiz
 juiz = classes_jogo.Juiz()
@@ -45,6 +45,7 @@ placar_computador.add(elementos_tela.FundoPlacar(False))
 
 rodando = True
 clicked_card = None
+click_enabled = True
 
 while rodando:
     game.tick()
@@ -53,15 +54,14 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not clicked_card and click_enabled:
             pos = pygame.mouse.get_pos()
-
-            if event.button == 1 and not clicked_card:
-                # retornar a carta clicada
-                for c in mao_jogador:
-                    if c.rect.collidepoint(pos):
-                        clicked_card = c
-                        break
+            # retornar a carta clicada
+            # clicked_card = game.card_in(pos)
+            for c in mao_jogador:
+                if c.rect.collidepoint(pos):
+                    clicked_card = c
+                    break
 
     if clicked_card:
         id_carta_computador = deck_computador.comprar_carta()
@@ -116,6 +116,7 @@ while rodando:
             mao_jogador.add(nova_carta)
 
         if juiz.verifica_se_o_jogo_terminou():
+            click_enabled = False
 
             if juiz.quem_ganhou_a_jogo():
                 print('computador ganhou')
