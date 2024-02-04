@@ -8,9 +8,6 @@ venv/
 # Python
 __pycache__/
 
-# text files
-*.txt
-
 # conf files
 *.iml
 *.xml
