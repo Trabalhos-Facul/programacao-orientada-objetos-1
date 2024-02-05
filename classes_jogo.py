@@ -107,7 +107,7 @@ class Deck:
             card_id = random.randint(0,len(self.cartas)-1)
             return Card(card_id, self.owner, self.cards_attrs[card_id - 1])
         else:
-            return -1
+            return None
         
     def get_by_id(self, card_id):
         return  Card(card_id, self.owner, self.cards_attrs[card_id - 1])
