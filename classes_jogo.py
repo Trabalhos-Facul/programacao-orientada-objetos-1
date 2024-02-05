@@ -12,16 +12,16 @@ class Juiz:
         jogador_ganhou = 0
         bot_ganhou = 1
 
-        resultado = self.qual_elemento_ganha_retorna_none_caso_empate(carta_jogador[1], carta_bot[1])
+        resultado = self.qual_elemento_ganha_retorna_none_caso_empate(carta_jogador.element, carta_bot.element)
 
         mesmo_elemento = resultado is None
         elemento_do_jogador_ganha = resultado == 0
 
         if mesmo_elemento:
-            if carta_jogador[0] == carta_bot[0]:
+            if carta_jogador.element == carta_bot.value:
                 return None
 
-            if carta_jogador[0] > carta_bot[0]:
+            if carta_jogador.element > carta_bot.value:
                 return jogador_ganhou
 
         if elemento_do_jogador_ganha:

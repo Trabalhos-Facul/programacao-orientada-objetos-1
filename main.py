@@ -16,17 +16,14 @@ player_deck = classes_jogo.Deck(quantidade_cartas, 'player')
 npc_deck = classes_jogo.Deck(quantidade_cartas, 'npc')
 
 # por todas as sprites aqui
-player_hand = game.player_hand
 
 placar_jogador = game.player_score
 placar_computador = game.npc_score
 
-cartas_rodada = game.played_cards
-
 # adiciona as 4 cartas a mao do jogador
 for i in range(4):
-    carta = player_deck.comprar_carta()
-    player_hand.buy(game_sprites.HandCard(carta))
+    card = player_deck.comprar_carta()
+    game.add_to_player_hand(card)
 
 # adiciona os fundos dos placares
 placar_jogador.add(elementos_tela.FundoPlacar(True))
@@ -50,24 +47,17 @@ while rodando:
                 clicked_card = player_deck.get_by_id(clicked_card_sprite.id)
 
     if clicked_card:
-        # carta_computador = npc_deck.buy (Deck.buy)
         npc_card = npc_deck.comprar_carta()
 
-        # desenha cartas jogadas
-        cartas_rodada.add(game_sprites.PlayedCard(clicked_card))
-        cartas_rodada.add(game_sprites.PlayedCard(npc_card))
+        game.draw_played_cards(clicked_card, npc_card)
 
         # define ganhador da rodada
-        carta_computador = dados_cartas.obter_valor_da_carta_e_elemento(npc_card.id)
-        carta_jogador = dados_cartas.obter_valor_da_carta_e_elemento(clicked_card.id)
-
-        ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
-        # atualiza placar
+        ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(clicked_card, npc_card)
 
         # desenha placar
         if not ganhador is None:
             if ganhador:
-                elemento_ganhador = carta_computador[1]
+                elemento_ganhador = npc_card.element
                 if elemento_ganhador == 'fogo':
                     placar_computador.add(elementos_tela.Fogo(False))
                 elif elemento_ganhador == 'agua':
@@ -75,7 +65,7 @@ while rodando:
                 elif elemento_ganhador == 'gelo':
                     placar_computador.add(elementos_tela.Gelo(False))
             else:
-                elemento_ganhador = carta_jogador[1]
+                elemento_ganhador = clicked_card.element
                 if elemento_ganhador == 'fogo':
                     placar_jogador.add(elementos_tela.Fogo(True))
                 elif elemento_ganhador == 'agua':
@@ -85,13 +75,12 @@ while rodando:
 
             juiz.contabiliza_no_placar_do_ganhador_da_rodada(ganhador, elemento_ganhador)
 
-        print(f'Jogador: {carta_jogador}')
-        print(f'Computador: {carta_computador}')
+        print(f'Jogador: {clicked_card.element}')
+        print(f'Computador: {npc_card}')
         print(f'Ganhador: {ganhador}')
 
         new_card = player_deck.comprar_carta()
-        new_card_sprite = game_sprites.HandCard(new_card)
-        player_hand.replace(clicked_card_sprite, new_card_sprite)
+        game.replace_player_hand(clicked_card_sprite, new_card)
 
         clicked_card = None
 

@@ -13,6 +13,9 @@ class GameDrawer:
         pygame.display.set_caption("Desafio Ninja")
         pygame.init()   
 
+        self.init_sprites()
+
+    def init_sprites(self):
         self.player_hand = Hand()
         self.player_score = pygame.sprite.Group()
         self.npc_score = pygame.sprite.Group()
@@ -30,6 +33,17 @@ class GameDrawer:
         self.played_cards.draw(self.display)
         self.result.draw(self.display)
         pygame.display.flip()
+
+    def add_to_player_hand(self, card):
+        self.player_hand.buy(HandCard(card))
+
+    def replace_player_hand(self, old_card_sprite, new_card):
+        new_card_sprite = HandCard(new_card)
+        self.player_hand.replace(old_card_sprite, new_card_sprite)
+
+    def draw_played_cards(self, player_card, npc_card):
+        self.played_cards.add(PlayedCard(player_card))
+        self.played_cards.add(PlayedCard(npc_card))
 
     def draw_result_msg(self, winner):
         self.result.add(FinalMsg(winner))
