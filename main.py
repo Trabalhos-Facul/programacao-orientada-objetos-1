@@ -21,7 +21,6 @@ player_hand = game.player_hand
 placar_jogador = game.player_score
 placar_computador = game.npc_score
 
-resultado_final = game.result
 cartas_rodada = game.played_cards
 
 # adiciona as 4 cartas a mao do jogador
@@ -99,14 +98,7 @@ while rodando:
         if juiz.verifica_se_o_jogo_terminou():
             click_enabled = False
 
-            if juiz.quem_ganhou_a_jogo():
-                print('computador ganhou')
-                mensagem = elementos_tela.MensagemFinal(False)
-            else:
-                print('jogador ganhou')
-                mensagem = elementos_tela.MensagemFinal(True)
-
-            resultado_final.add(mensagem)
+            game.draw_result_msg(juiz.quem_ganhou_a_jogo())
 
     game.draw()
 

@@ -81,9 +81,9 @@ class Juiz:
 
     def quem_ganhou_a_jogo(self):
         if all(self.placar_jogador):
-            return 0
+            return "player"
         elif all(self.placar_bot):
-            return 1
+            return "npc"
         else:
             return None
 

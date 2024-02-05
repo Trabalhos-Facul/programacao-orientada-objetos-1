@@ -31,6 +31,9 @@ class GameDrawer:
         self.result.draw(self.display)
         pygame.display.flip()
 
+    def draw_result_msg(self, winner):
+        self.result.add(FinalMsg(winner))
+
     def card_in(self, position):
         return self.player_hand.card_in(position)
 
@@ -68,6 +71,8 @@ class CardSprite(pygame.sprite.Sprite):
             self.id = card.id
             self.image = self.get_img()
             self.rect = self.image.get_rect()
+        else:
+            self.rect = None
     
     def get_img(self):
         image = pygame.image.load(f'img/Card-Jitsu_Cards_full_{self.id}.png').convert()
@@ -77,7 +82,7 @@ class HandCard(CardSprite):
     def set_position_on(self, slot):
         HEIGHT = 500
         HEIGHT_OFFSET = 225
-        if(self.rect):
+        if self.rect:
             self.rect.center = (HEIGHT_OFFSET + (slot * 125), (HEIGHT * 3) // 4)
 
 class PlayedCard(CardSprite):
@@ -96,3 +101,18 @@ class PlayedCard(CardSprite):
 class ScoreDrawer(pygame.sprite.Group):
     def __init__():
         pass
+
+class FinalMsg(pygame.sprite.Sprite):
+    def __init__(self, winner):
+        pygame.sprite.Sprite.__init__(self)
+
+        if winner == "player":
+            print('Player Wins!')
+            self.image = pygame.image.load(f'img/you_wins.png').convert()
+        else:
+            print('NPC Wins!')
+            self.image = pygame.image.load(f'img/you_lost.png').convert()
+
+        self.rect = self.image.get_rect()
+
+        self.rect.center = 400, 250

@@ -42,22 +42,6 @@ class Gelo(pygame.sprite.Sprite):
         else:
             self.rect.center = 500,100
 
-
-class MensagemFinal(pygame.sprite.Sprite):
-    def __init__(self, jogador: object) -> object:
-
-        pygame.sprite.Sprite.__init__(self)
-
-        if jogador:
-            self.image = pygame.image.load(f'img/voce_ganhou.png').convert()
-        else:
-            self.image = pygame.image.load(f'img/voce_perdeu.png').convert()
-
-        self.rect = self.image.get_rect()
-
-        self.rect.center = 400, 250
-
-
 class FundoPlacar(pygame.sprite.Sprite):
     def __init__(self, jogador):
 
