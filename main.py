@@ -7,14 +7,13 @@ import game_sprites
 # inicializacao da janela pygame
 game = game_sprites.GameDrawer()
 
-# cria o juiz
 juiz = classes_jogo.Juiz()
 
 # cria as cartas todas as cartas(decks)
 quantidade_cartas = dados_cartas.obter_numero_de_cartas()
 
-deck_jogador = classes_jogo.Deck(quantidade_cartas)
-deck_computador = classes_jogo.Deck(quantidade_cartas)
+player_deck = classes_jogo.Deck(quantidade_cartas, 'player')
+npc_deck = classes_jogo.Deck(quantidade_cartas, 'npc')
 
 # por todas as sprites aqui
 player_hand = game.player_hand
@@ -27,8 +26,8 @@ cartas_rodada = game.played_cards
 
 # adiciona as 4 cartas a mao do jogador
 for i in range(4):
-    id_carta = deck_jogador.comprar_carta()
-    player_hand.buy(game_sprites.Card(id_carta))
+    carta = player_deck.comprar_carta()
+    player_hand.buy(game_sprites.HandCard(carta.id))
 
 # adiciona os fundos dos placares
 placar_jogador.add(elementos_tela.FundoPlacar(True))
@@ -47,21 +46,20 @@ while rodando:
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not clicked_card and click_enabled:
             pos = pygame.mouse.get_pos()
-            clicked_card = game.card_in(pos)
+            clicked_card_sprite = game.card_in(pos)
+            if clicked_card_sprite:
+                clicked_card = player_deck.get_by_id(clicked_card_sprite.id)
 
     if clicked_card:
-        # carta_computador = deck_computador.buy (Deck.buy)
-        id_carta_computador = deck_computador.comprar_carta()
+        # carta_computador = npc_deck.buy (Deck.buy)
+        npc_card = npc_deck.comprar_carta()
 
         # desenha cartas jogadas
-        carta_jogador_mostrar = elementos_tela.CartaJogada(True, clicked_card.image)
-        carta_computador_mostrar = elementos_tela.CartaJogada(False, dados_cartas.imagem_carta(id_carta_computador))
-
-        cartas_rodada.add(carta_jogador_mostrar)
-        cartas_rodada.add(carta_computador_mostrar)
+        cartas_rodada.add(game_sprites.PlayedCard(clicked_card))
+        cartas_rodada.add(game_sprites.PlayedCard(npc_card))
 
         # define ganhador da rodada
-        carta_computador = dados_cartas.obter_valor_da_carta_e_elemento(id_carta_computador)
+        carta_computador = dados_cartas.obter_valor_da_carta_e_elemento(npc_card.id)
         carta_jogador = dados_cartas.obter_valor_da_carta_e_elemento(clicked_card.id)
 
         ganhador = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(carta_jogador, carta_computador)
@@ -92,11 +90,10 @@ while rodando:
         print(f'Computador: {carta_computador}')
         print(f'Ganhador: {ganhador}')
 
-        id_nova_carta = deck_jogador.comprar_carta()
+        nova_carta = player_deck.comprar_carta()
 
-        if id_nova_carta != -1:
-            new_card = game_sprites.Card(id_nova_carta)
-            player_hand.replace(clicked_card, new_card)
+        new_card = game_sprites.HandCard(nova_carta.id)
+        player_hand.replace(clicked_card_sprite, new_card)
 
         clicked_card = None
 

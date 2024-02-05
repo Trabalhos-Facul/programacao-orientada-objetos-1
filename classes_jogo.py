@@ -88,7 +88,8 @@ class Juiz:
             return None
 
 class Deck:
-    def __init__(self, tamnho_deck):
+    def __init__(self, tamnho_deck, owner):
+        self.owner = owner
         self.cartas = []
         self.cards_attrs = self.load_cards_attrs()
         
@@ -103,10 +104,13 @@ class Deck:
 
     def comprar_carta(self):
         if self.cartas:
-            x = random.randint(0,len(self.cartas)-1)
-            return self.cartas.pop(x)
+            card_id = random.randint(0,len(self.cartas)-1)
+            return Card(card_id, self.owner, self.cards_attrs[card_id - 1])
         else:
             return -1
+        
+    def get_by_id(self, card_id):
+        return  Card(card_id, self.owner, self.cards_attrs[card_id - 1])
 
 class Card:
     def __init__(self, id, owner, card_attr) -> None:

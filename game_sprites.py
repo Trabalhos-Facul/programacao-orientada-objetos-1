@@ -50,9 +50,10 @@ class Hand(pygame.sprite.Group):
         slot_key = list(self.slots.values()).index(old_card_sprite)
         self.remove(old_card_sprite)
 
-        new_card_sprite.set_position_on(slot_key)
-        self.slots[slot_key] = new_card_sprite
-        self.add(new_card_sprite)
+        if new_card_sprite:
+            new_card_sprite.set_position_on(slot_key)
+            self.slots[slot_key] = new_card_sprite
+            self.add(new_card_sprite)
 
     def card_in(self, position):
         for card in list(self.slots.values()):
@@ -60,20 +61,32 @@ class Hand(pygame.sprite.Group):
                 return card
         return None
 
-class Card(pygame.sprite.Sprite):
-    HEIGHT = 500
-    HEIGHT_OFFSET = 225
-
+class CardSprite(pygame.sprite.Sprite):
     def __init__(self, id_carta):
-        pygame.sprite.Sprite.__init__(self)
-        self.id = id_carta
-        self.image = pygame.image.load(f'img/Card-Jitsu_Cards_full_{id_carta}.png').convert()
-        self.image = pygame.transform.scale(self.image, (100, 120))
-        self.rect = self.image.get_rect()
-    
-    def set_position_on(self, slot):
-        self.rect.center = (self.HEIGHT_OFFSET + (slot * 125), (self.HEIGHT * 3) // 4)
+        if id_carta > 0:
+            pygame.sprite.Sprite.__init__(self)
+            self.id = id_carta
+            self.image = pygame.image.load(f'img/Card-Jitsu_Cards_full_{id_carta}.png').convert()
+            self.image = pygame.transform.scale(self.image, (100, 120))
+            self.rect = self.image.get_rect()
 
+class HandCard(CardSprite):
+    def set_position_on(self, slot):
+        HEIGHT = 500
+        HEIGHT_OFFSET = 225
+        self.rect.center = (HEIGHT_OFFSET + (slot * 125), (HEIGHT * 3) // 4)
+
+class PlayedCard(CardSprite):
+    def __init__(self, card):
+        super().__init__(card.id)
+        self.rect.center = self.rect_center_of(card.owner)
+    
+    def rect_center_of(self, owner):
+        if owner == 'player':
+            return 200, 250
+        else:
+            return 600, 250
+        
 class ScoreDrawer(pygame.sprite.Group):
     def __init__():
         pass
