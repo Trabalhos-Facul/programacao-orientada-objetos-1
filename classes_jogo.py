@@ -4,14 +4,10 @@ import json
 
 class Juiz:
     def __init__(self):
-        self.placar_jogador = [False, False, False]
-        self.placar_bot = [False, False, False]
+        self.score = Score()
         self.elementos_cartas = ['agua', 'fogo', 'gelo']
 
     def qual_carta_ganha_a_rodada_retorna_none_caso_empate(self, carta_jogador, carta_bot):
-        jogador_ganhou = 0
-        bot_ganhou = 1
-
         resultado = self.qual_elemento_ganha_retorna_none_caso_empate(carta_jogador.element, carta_bot.element)
 
         mesmo_elemento = resultado is None
@@ -22,12 +18,12 @@ class Juiz:
                 return None
 
             if carta_jogador.element > carta_bot.value:
-                return jogador_ganhou
+                return carta_jogador
 
         if elemento_do_jogador_ganha:
-            return jogador_ganhou
+            return carta_jogador
         else:
-            return bot_ganhou
+            return carta_bot
 
     def stroger_card(self, card_0, card_1):
         result = self.stronger_element(card_0, card_1)
@@ -50,6 +46,9 @@ class Juiz:
         else:
             return card_1
 
+    def record_winner_card(self, card):
+        self.score.record_winner_card(card)
+
     def qual_elemento_ganha_retorna_none_caso_empate(self, elemento_0, elemento_1):
         index_elemento_0 = self.elementos_cartas.index(elemento_0)
         index_elemento_1 = self.elementos_cartas.index(elemento_1)
@@ -62,30 +61,11 @@ class Juiz:
         else:
             return 0
 
-    def contabiliza_no_placar_do_ganhador_da_rodada(self, ganhador, elemento):
-        index_para_ser_contabilizado = self.elementos_cartas.index(elemento)
-        jogador_ganhou = ganhador == 0
-        bot_ganhou = ganhador == 1
-
-        if jogador_ganhou:
-            self.placar_jogador[index_para_ser_contabilizado] = True
-
-        elif bot_ganhou:
-            self.placar_bot[index_para_ser_contabilizado] = True
-
     def verifica_se_o_jogo_terminou(self):
-        if all(self.placar_jogador) or all(self.placar_bot):
-            return True
-        else:
-            return False
+        return self.score.has_winner()
 
     def quem_ganhou_a_jogo(self):
-        if all(self.placar_jogador):
-            return "player"
-        elif all(self.placar_bot):
-            return "npc"
-        else:
-            return None
+        return self.score.who_wins()
 
 class Deck:
     def __init__(self, tamnho_deck, owner):
@@ -118,3 +98,28 @@ class Card:
         self.owner = owner
         self.value = card_attr['value']
         self.element = card_attr['element']
+
+    def is_player_owner(self):
+        return self.owner == "player"
+
+class Score:
+    def __init__(self):
+        self.player_score = {"fogo": 0, "gelo": 0, "agua": 0}
+        self.npc_score = {"fogo": 0, "gelo": 0, "agua": 0}
+
+    def record_winner_card(self, card):
+        if card.is_player_owner():
+            self.player_score[card.element] = 1
+        else:
+            self.npc_score[card.element] = 1
+
+    def has_winner(self):
+        return all(self.player_score.values()) or all(self.npc_score.values())
+    
+    def who_wins(self):
+        if all(self.player_score.values()):
+            return "player"
+        elif all(self.npc_score.values()):
+            return "npc"
+        else:
+            return None

@@ -1,4 +1,5 @@
 import pygame
+import elementos_tela
 
 class GameDrawer:
     FPS = 60
@@ -8,19 +9,26 @@ class GameDrawer:
     def __init__(self) -> None:
         self.clock = pygame.time.Clock()
         self.display = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        dojo = pygame.image.load(f'img/dojo.png')
-        self.bg_img = pygame.transform.scale(dojo, (self.WIDTH, self.HEIGHT))
+        
         pygame.display.set_caption("Desafio Ninja")
         pygame.init()   
 
         self.init_sprites()
+        self.add_backgrounds()
 
     def init_sprites(self):
         self.player_hand = Hand()
-        self.player_score = pygame.sprite.Group()
-        self.npc_score = pygame.sprite.Group()
+        self.score = pygame.sprite.Group()
         self.played_cards = pygame.sprite.Group()
         self.result = pygame.sprite.Group()
+
+    def add_backgrounds(self):
+        dojo = pygame.image.load(f'img/dojo.png')
+        self.bg_img = pygame.transform.scale(dojo, (self.WIDTH, self.HEIGHT))
+
+        self.score.add(elementos_tela.FundoPlacar(True))
+        self.score.add(elementos_tela.FundoPlacar(False))
+
 
     def tick(self):
         self.display.blit(self.bg_img, (0, 0))
@@ -28,8 +36,7 @@ class GameDrawer:
     
     def draw(self):
         self.player_hand.draw(self.display)
-        self.player_score.draw(self.display)
-        self.npc_score.draw(self.display)
+        self.score.draw(self.display)
         self.played_cards.draw(self.display)
         self.result.draw(self.display)
         pygame.display.flip()
@@ -45,6 +52,16 @@ class GameDrawer:
     def draw_played_cards(self, player_card, npc_card):
         self.played_cards.add(PlayedCard(player_card))
         self.played_cards.add(PlayedCard(npc_card))
+
+    def draw_score(self, winner_card):       
+        if not winner_card is None:            
+            elemento_ganhador = winner_card.element
+            if elemento_ganhador == 'fogo':
+                self.score.add(elementos_tela.Fogo(winner_card.is_player_owner()))
+            elif elemento_ganhador == 'agua':
+                self.score.add(elementos_tela.Agua(winner_card.is_player_owner()))
+            elif elemento_ganhador == 'gelo':
+                self.score.add(elementos_tela.Gelo(winner_card.is_player_owner()))
 
     def draw_result_msg(self, winner):
         self.result.add(FinalMsg(winner))
