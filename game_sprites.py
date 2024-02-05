@@ -38,8 +38,9 @@ class GameDrawer:
         self.player_hand.buy(HandCard(card))
 
     def replace_player_hand(self, old_card_sprite, new_card):
-        new_card_sprite = HandCard(new_card)
-        self.player_hand.replace(old_card_sprite, new_card_sprite)
+        self.player_hand.discard(old_card_sprite)
+        if new_card:
+            self.player_hand.buy(HandCard(new_card))
 
     def draw_played_cards(self, player_card, npc_card):
         self.played_cards.add(PlayedCard(player_card))
@@ -63,14 +64,10 @@ class Hand(pygame.sprite.Group):
         self.slots[empty_slot] = card_sprite
         self.add(card_sprite)
     
-    def replace(self, old_card_sprite, new_card_sprite):
-        slot_key = list(self.slots.values()).index(old_card_sprite)
-        self.remove(old_card_sprite)
-
-        if new_card_sprite:
-            new_card_sprite.set_position_on(slot_key)
-            self.slots[slot_key] = new_card_sprite
-            self.add(new_card_sprite)
+    def discard(self, card_sprite) -> None:
+        slot_key = list(self.slots.values()).index(card_sprite)
+        self.slots[slot_key] = None
+        self.remove(card_sprite)
 
     def card_in(self, position):
         for card in list(self.slots.values()):

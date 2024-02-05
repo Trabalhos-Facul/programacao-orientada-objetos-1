@@ -78,9 +78,8 @@ while rodando:
         print(f'Jogador: {clicked_card.element}')
         print(f'Computador: {npc_card}')
         print(f'Ganhador: {ganhador}')
-
-        new_card = player_deck.comprar_carta()
-        game.replace_player_hand(clicked_card_sprite, new_card)
+  
+        game.replace_player_hand(clicked_card_sprite, player_deck.comprar_carta())
 
         clicked_card = None
 
