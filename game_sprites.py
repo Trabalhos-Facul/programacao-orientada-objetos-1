@@ -62,27 +62,33 @@ class Hand(pygame.sprite.Group):
         return None
 
 class CardSprite(pygame.sprite.Sprite):
-    def __init__(self, id_carta):
-        if id_carta > 0:
+    def __init__(self, card):
+        if card and card.id > 0:
             pygame.sprite.Sprite.__init__(self)
-            self.id = id_carta
-            self.image = pygame.image.load(f'img/Card-Jitsu_Cards_full_{id_carta}.png').convert()
-            self.image = pygame.transform.scale(self.image, (100, 120))
+            self.id = card.id
+            self.image = self.get_img()
             self.rect = self.image.get_rect()
+    
+    def get_img(self):
+        image = pygame.image.load(f'img/Card-Jitsu_Cards_full_{self.id}.png').convert()
+        return pygame.transform.scale(image, (100, 120))
 
 class HandCard(CardSprite):
     def set_position_on(self, slot):
         HEIGHT = 500
         HEIGHT_OFFSET = 225
-        self.rect.center = (HEIGHT_OFFSET + (slot * 125), (HEIGHT * 3) // 4)
+        if(self.rect):
+            self.rect.center = (HEIGHT_OFFSET + (slot * 125), (HEIGHT * 3) // 4)
 
 class PlayedCard(CardSprite):
     def __init__(self, card):
-        super().__init__(card.id)
-        self.rect.center = self.rect_center_of(card.owner)
+        super().__init__(card)
+        if self.rect:
+            self.owner = card.owner
+            self.rect.center = self.rect_center_of()
     
-    def rect_center_of(self, owner):
-        if owner == 'player':
+    def rect_center_of(self):
+        if self.owner == 'player':
             return 200, 250
         else:
             return 600, 250

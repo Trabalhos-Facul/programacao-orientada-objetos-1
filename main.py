@@ -27,7 +27,7 @@ cartas_rodada = game.played_cards
 # adiciona as 4 cartas a mao do jogador
 for i in range(4):
     carta = player_deck.comprar_carta()
-    player_hand.buy(game_sprites.HandCard(carta.id))
+    player_hand.buy(game_sprites.HandCard(carta))
 
 # adiciona os fundos dos placares
 placar_jogador.add(elementos_tela.FundoPlacar(True))
@@ -90,10 +90,9 @@ while rodando:
         print(f'Computador: {carta_computador}')
         print(f'Ganhador: {ganhador}')
 
-        nova_carta = player_deck.comprar_carta()
-
-        new_card = game_sprites.HandCard(nova_carta.id)
-        player_hand.replace(clicked_card_sprite, new_card)
+        new_card = player_deck.comprar_carta()
+        new_card_sprite = game_sprites.HandCard(new_card)
+        player_hand.replace(clicked_card_sprite, new_card_sprite)
 
         clicked_card = None
 
