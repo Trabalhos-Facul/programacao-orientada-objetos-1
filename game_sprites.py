@@ -46,7 +46,7 @@ class GameDrawer:
 
     def replace_player_hand(self, old_card_sprite, new_card):
         self.player_hand.discard(old_card_sprite)
-        if new_card:
+        if new_card is not None:
             self.player_hand.buy(HandCard(new_card))
 
     def draw_played_cards(self, player_card, npc_card):
@@ -54,7 +54,7 @@ class GameDrawer:
         self.played_cards.add(PlayedCard(npc_card))
 
     def draw_score(self, winner_card):       
-        if not winner_card is None:            
+        if winner_card is not None:            
             elemento_ganhador = winner_card.element
             if elemento_ganhador == 'fogo':
                 self.score.add(elementos_tela.Fogo(winner_card.is_player_owner()))
