@@ -41,6 +41,7 @@ while rodando:
         winner_card = juiz.qual_carta_ganha_a_rodada_retorna_none_caso_empate(player_card, npc_card)
         juiz.record_winner_card(winner_card)
 
+        print("------------------------------")
         print(f'Jogador: {player_card.element}')
         print(f'Computador: {npc_card.element}')
         print(f'Ganhador: {winner_card.owner}')
