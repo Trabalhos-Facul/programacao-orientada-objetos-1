@@ -9,7 +9,6 @@ drawer = game_sprites.GameDrawer()
 runner = game_runner.Game(drawer)
 
 clicked_card_sprite = None
-game_finished = False
 
 while True:
     drawer.tick()
